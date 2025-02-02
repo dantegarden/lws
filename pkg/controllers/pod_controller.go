@@ -330,18 +330,11 @@ func constructWorkerStatefulSetApplyConfiguration(leaderPod corev1.Pod, lws lead
 			WithReplicas(*lws.Spec.LeaderWorkerTemplate.Size - 1).
 			WithPodManagementPolicy(appsv1.ParallelPodManagement).
 			WithTemplate(&podTemplateApplyConfiguration).
-			WithOrdinals(appsapplyv1.StatefulSetOrdinals().WithStart(1)).
+			WithOrdinals(appsapplyv1.StatefulSetOrdinals().WithStart(0)).
 			WithSelector(metaapplyv1.LabelSelector().
 				WithMatchLabels(selectorMap))).
 		WithLabels(labelMap)
 
-	if ordinalsStart, exists := lws.Annotations[leaderworkerset.WorkerOrdinalsStartAnnotationKey]; exists {
-		startIndex, err := strconv.ParseInt(ordinalsStart, 10, 64)
-		startIndexInt32 := int32(startIndex)
-		if err == nil {
-			statefulSetConfig.Spec.Ordinals.Start = &startIndexInt32
-		}
-	}
 	return statefulSetConfig, nil
 }
 
