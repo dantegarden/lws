@@ -1,0 +1,14 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+approvers:
+  - ahg-g
+  - kerthcet
+  - edwinhr716
+
+reviewers:
+  - ahg-g
+  - kerthcet
+  - edwinhr716
+
+emeritus_approvers:
+  - liurupeng 
